@@ -474,10 +474,10 @@ canvas { width: 100%; height: 100%; display: block; }
     }
     
     .record-player { 
-        top: 20px; /* Moved to top corner */
-        right: 20px; 
+        top: 200px; /* Moved to top corner */
+        left: 20px; 
         width: 100px; 
         height: 100px; 
-        transform: rotate(0deg); /* Removed rotation to save space */
+        transform: rotate(-34deg); /* Removed rotation to save space */
     }
 }
