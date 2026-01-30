@@ -136,7 +136,7 @@ body {
 .hanging-hearts { 
     top: 0; 
     left: 15px; 
-    width: 280px; /* Big enough for the corner */
+    width: 280px; 
     height: 350px; 
 }
 
@@ -159,13 +159,13 @@ body {
 .fireworks { top: 40px; left: 150px; width: 150px; height: 150px; transform: rotate(15deg); }
 .mailbox { bottom: 20px; right: 20px; width: 200px; height: 280px; }
 .heart-mascot { top: 20px; left: 20px; width: 80px; height: 80px; }
-.retro-pc { bottom: 40px; left: 40px; width: 180px; height: 150px;  }
-.record-player { top: 25%; right: 100px; width: 180px; height: 180px; transform: rotate(35deg); }
-.hearts-stream { top: 100px; left: 25%; width: 300px; height: 400px; }
+.retro-pc { bottom: 40px; left: 40px; width: 180px; height: 150px; }
+.record-player { top: 25%; right: 100px; width: 180px; height: 180px; }
+.hearts-stream { top: 100px; left: 28%; width: 300px; height: 400px; }
 .xoxo { top: 300px; right: 80px; width: 180px; height: 150px; }
 .teddy  { bottom: 5px; left: 30px; width: 250px; height: 250px; }
 .masha  { bottom: 0px; right: 50px; width: 200px; height: 200px; }
-.floatinghearts { top: 130px; left: 25%; width: 300px; height: 350px; transform: rotate(-15deg); }
+.floatinghearts { top: 130px; left: 30%; width: 300px; height: 350px; }
 .pony { bottom: 0px; left: 0px; width: 150px; height: 150px; }
 
 
@@ -201,7 +201,7 @@ button:active { transform: scale(0.95); }
 .canvas-container { background: white; border: 3px solid #D32F2F; border-radius: 10px; padding: 0; cursor: crosshair; margin: 20px auto; width: 300px; height: 150px; overflow: hidden; position: relative; }
 canvas { width: 100%; height: 100%; display: block; }
 
-/* --- GIFTS (UPDATED WITH POP-UP ANIMATION) --- */
+/* --- GIFTS --- */
 .gift-container { 
     display: flex; 
     gap: 15px; 
@@ -209,6 +209,7 @@ canvas { width: 100%; height: 100%; display: block; }
     margin-top: 30px; 
 }
 
+/* Default Desktop Styles */
 .gift-box { 
     width: 100px; 
     height: 100px; 
@@ -222,20 +223,13 @@ canvas { width: 100%; height: 100%; display: block; }
     font-size: 1.2rem; 
     color: #D32F2F; 
     cursor: pointer;
-    /* This line makes the movement smooth */
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* This section makes them pop up when you hover */
 .gift-box:hover {
     transform: translateY(-15px) scale(1.1);
     background-color: #FFB790;
 }
-
-/* --- QR SCREEN --- */
-.qr-placeholder { background: white; padding: 10px; border: 3px dashed #D32F2F; border-radius: 10px; display: inline-block; margin: 20px 0; }
-.qr-placeholder img { width: 250px; height: 250px; display: block; }
-.btn-round { width: 60px; height: 60px; border-radius: 50%; background: #D32F2F; color: white; border: none; font-size: 0.8rem; box-shadow: none; display: inline-flex; align-items: center; justify-content: center; }
 
 /* --- GIFT 1: BOUQUET & BUBBLES --- */
 .bouquet-container {
@@ -359,18 +353,17 @@ canvas { width: 100%; height: 100%; display: block; }
 }
 
 @keyframes explode {
-    0% {
-        transform: translate(0, 0) scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(var(--tx), var(--ty)) scale(0);
-        opacity: 0;
-    }
+    0% { transform: translate(0, 0) scale(1); opacity: 1; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
 }
 
+/* --- QR SCREEN --- */
+.qr-placeholder { background: white; padding: 10px; border: 3px dashed #D32F2F; border-radius: 10px; display: inline-block; margin: 20px 0; }
+.qr-placeholder img { width: 250px; height: 250px; display: block; }
+.btn-round { width: 60px; height: 60px; border-radius: 50%; background: #D32F2F; color: white; border: none; font-size: 0.8rem; box-shadow: none; display: inline-flex; align-items: center; justify-content: center; }
+
 /* ------------------------------------------------ */
-/* MOBILE OPTIMIZATION (<600px)         */
+/* MOBILE OPTIMIZATION (<600px)                    */
 /* ------------------------------------------------ */
 @media (max-width: 600px) {
     /* 1. Resize Fonts so they fit */
@@ -429,52 +422,43 @@ canvas { width: 100%; height: 100%; display: block; }
         right: 20px;
     }
 
-    .gift-box { 
-    width: 100px; 
-    height: 100px; 
-    background-color: #FFA07A; 
-    border: 2px solid #D32F2F; 
-    border-radius: 15px; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    box-shadow: 0 5px 0 #bf360c; 
-    font-size: 1.2rem; 
-    color: #D32F2F; 
-    cursor: pointer;
-    /* This line makes the movement smooth */
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-/* This section makes them pop up when you hover */
-/* --- NEW FIX: Buttons Pop on Touch --- */
-    /* This makes the buttons jump when you TAP them on phone */
+    /* Fix: Button Pop on Touch */
     .gift-box:active { 
         transform: translateY(-15px) scale(1.1);
         background-color: #FFB790;
-        transition: transform 0.1s; /* Fast animation for touch */
-    
+        transition: transform 0.1s; 
+    }
+
     /* 7. Gift 1 Mobile adjustments */
-    .bouquet-container { width: 180px; height: 220px; }
+    /* Made bouquet smaller so bubbles don't overlap it */
+    .bouquet-container { width: 140px; height: 180px; }
     
+    /* Kept Bubble size but reduced font slightly to fit text */
     .bubble { 
         width: 125px; 
-        font-size: 0.75rem; 
-        padding: 8px; 
+        font-size: 0.7rem; 
+        padding: 5px; 
     }
     
-    /* Reposition bubbles for small screen */
-    .bubble-top-left { top: 15%; left: 2%; }
-    .bubble-top-right { top: 15%; right: 2%; }
-    .bubble-middle-left { top: 45%; left: 0%; }
-    .bubble-middle-right { top: 45%; right: 0%; }
-    .bubble-bottom-left { bottom: 20%; left: 2%; }
-    .bubble-bottom-right { bottom: 20%; right: 2%; }
+    /* Tighter Positioning for Bubbles to fit on screen */
+    .bubble-top-left { top: 12%; left: 2%; }
+    .bubble-top-right { top: 12%; right: 2%; }
+    .bubble-middle-left { top: 40%; left: 0%; }
+    .bubble-middle-right { top: 40%; right: 0%; }
+    .bubble-bottom-left { bottom: 15%; left: 2%; }
+    .bubble-bottom-right { bottom: 15%; right: 2%; }
 
     /* 8. Gift 2 Note Paper Resize */
     .note-paper { width: 90%; }
 
     /* 9. Hearts Stream - Smaller & Left Side */
+    .hearts-stream {
+        width: 40px; /* Made narrower */
+        height: 150px;
+        left: 10px;
+        top: 100px;
+    }
+    
     .floatinghearts {
         width: 40px;
         height: 150px;
@@ -483,22 +467,17 @@ canvas { width: 100%; height: 100%; display: block; }
     }
 
     .retro-pc { 
-        bottom: 0px; 
-        left: 30%; 
-        width: 180px; 
-        height: 150px;
+        bottom: 10px; 
+        left: 10px; 
+        width: 100px; /* Reduced size */
+        height: 100px;
     }
-.record-player { 
-    bottom: 19%; 
-    right: 250px; 
-    width: 180px; 
-    height: 180px; 
-     transform: rotate(-34deg);
-}
-.hearts-stream { 
-    top: 10px; 
-    left: 5px; 
-    width: 150px; 
-    height: 140px; 
-}
+    
+    .record-player { 
+        top: 20px; /* Moved to top corner */
+        right: 20px; 
+        width: 100px; 
+        height: 100px; 
+        transform: rotate(0deg); /* Removed rotation to save space */
+    }
 }
