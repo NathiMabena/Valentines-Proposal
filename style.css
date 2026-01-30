@@ -447,10 +447,12 @@ canvas { width: 100%; height: 100%; display: block; }
 }
 
 /* This section makes them pop up when you hover */
-.gift-box:hover {
-    transform: translateY(-15px) scale(1.1);
-    background-color: #FFB790;
-}
+/* --- NEW FIX: Buttons Pop on Touch --- */
+    /* This makes the buttons jump when you TAP them on phone */
+    .gift-box:active { 
+        transform: translateY(-15px) scale(1.1);
+        background-color: #FFB790;
+        transition: transform 0.1s; /* Fast animation for touch */
     
     /* 7. Gift 1 Mobile adjustments */
     .bouquet-container { width: 180px; height: 220px; }
