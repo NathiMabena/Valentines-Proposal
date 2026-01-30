@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V Day Proposal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="music-container">
+        <button id="music-toggle" class="music-disc">💿</button>
+        <div id="music-menu" class="music-menu hidden">
+            <p>Pick a vibe:</p>
+            <button onclick="playSong('Dave - Raindance - Instrumental.mp3')">1. I Can Put A Ring On It</button>
+            <button onclick="playSong('Dancing In The Dark - Rihanna ( slowed & reverb ).mp3')">2. Dancing In The Dark</button>
+            <button onclick="playSong('Those Eyes - New West Instrumental (Violin Cover).mp3')">3. Bridgerton Vibes</button>
+            <button onclick="playSong('Tems - Me & U (Acoustic Version).mp3')">4. Only Me & You </button>
+            <button onclick="stopMusic()" class="btn-stop">Stop Music</button>
+        </div>
+        <audio id="bg-music" loop></audio>
+    </div>
+
+    <div id="screen-ask" class="screen active">
+        <div class="decoration hanging-hearts"><img src="images/hanginghearts2.png" alt="Hanging Hearts"></div>
+        <div class="decoration calendar-icon"><img src="images/Calendar.png" alt="Calendar"></div>
+
+        <div class="content">
+            <div class="main-image"><img src="images/pngwing.com.png" alt="Cute Bunnies"></div>
+            <h1>Hey there,<br>Will you be my Valentine?</h1>
+            <div class="buttons">
+                <button id="btn-yes" class="btn-primary">YES OF COURSE</button>
+                <button id="btn-no" class="btn-secondary">NO THANK YOU</button>
+            </div>
+        </div>
+        <div class="decoration paper-plane"><img src="images/PaperPlane.png" alt="Paper Plane"></div>
+    </div>
+
+    <div id="screen-retry" class="screen">
+        <div class="content">
+            <div class="main-image"><img src="images/sad.png" alt="Sad"></div>
+            <h1>Oh no! <br> Are you sure?</h1>
+            <p>Please try again...</p>
+            <button id="btn-retry" class="btn-primary">TRY AGAIN</button>
+        </div>
+    </div>
+
+    <div id="screen-sign" class="screen">
+        <div class="content">
+            <h1>It's a Date!</h1>
+            <p>Please sign here to make it official:</p>
+            <div class="canvas-container">
+                <canvas id="signature-pad"></canvas>
+            </div>
+            <div class="buttons">
+                <button id="btn-clear" class="btn-secondary">Clear</button>
+                <button id="btn-submit-signature" class="btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="screen-gifts" class="screen">
+        <div class="content">
+             <div class="main-image"><img src="images/blushing.png" alt="Sad"></div>
+            <h1>Yay, you said yes! you're interested hmmm🥺</h1>
+            <p>I made all these for you hehe</p>
+            <div class="gift-container">
+                <button class="gift-box" onclick="showGift(1)">Words</button>
+                <button class="gift-box" onclick="showGift(2)">Date</button>
+                <button class="gift-box" onclick="showGift(3)">Sound</button>
+            </div>
+        </div>
+        <div class="decoration fireworks"><img src="images/heart.png" alt="Fireworks"></div>
+        
+        <div class="decoration mailbox"><img src="images/mailbox.png" alt="Mailbox"></div>
+        <div class="decoration teddy"><img src="images/big teddy.png" alt="Teddy Bear"></div>
+    </div>
+
+    <div id="screen-gift-1" class="screen">
+        <div class="content">
+            <h1>Things I like/love about you<br>Jellybean</h1>
+
+            <div class="bouquet-container">
+                <img src="images/favflowers.png" alt="Bouquet" class="bouquet-img">
+                <p class="favorite-flower-text">Your favourite flower</p>
+            </div>
+
+            <div class="bubble bubble-top-left">Your cute smile has to be there (you can sing aswell 😍!!)</div>
+            <div class="bubble bubble-bottom-left">Very much resilient</div>
+            <div class="bubble bubble-top-right">The eyes chico, they never lie (Beautiful)</div>
+            <div class="bubble bubble-bottom-right">Supportive to the core</div>
+            
+            <div class="bubble bubble-middle-left">Radiant energy</div>
+            <div class="bubble bubble-middle-right">The best of it all has to you as a whole</div>
+
+             <div class="decoration masha"><img src="images/masha.png" alt="Masha"></div>
+
+            <button class="btn-secondary btn-back" onclick="switchScreen('screen-gifts')">Back</button>
+        </div>
+    </div>
+
+    <div id="screen-gift-2" class="screen">
+        <div class="content">
+            <h1 style="color: #D32F2F; margin-bottom: 10px;">The Plan for Us...</h1>
+            
+            <div class="note-paper">
+                <h2>Date Details (With my Gangsta)</h2>
+                <p>
+                    <strong>1. Pick up:</strong> 13:00 PM 🚗<br>
+                    <strong>2. Activity:</strong> Pottery Session 🌟<br>
+                    <strong>3. Food:</strong> Yes you have to eat(kinda) we can get something light 🍝<br>
+                    <strong>4. Unknown:</strong> Guess we have to wait and see for this one....<br>
+                    <br>
+                   My promise to you jellybean? to make it a fun and memorable day for us both!
+                   forget the idea of the date and just be present hehe<br><br>
+                </p>
+                <div class="decoration xoxo-note">XOXO</div>
+            </div>
+
+            <button class="btn-secondary btn-back" onclick="switchScreen('screen-gifts')">Back</button>
+        </div>
+         <div class="decoration floatinghearts"><img src="images/floating hearts.png" alt="Floating Hearts"></div>
+         <div class="decoration pony"><img src="images/pony.png" alt="Pony"></div>
+    </div>
+
+   <div id="screen-qr" class="screen">
+        <div class="decoration hearts-stream"><img src="images/hearts stream.png" alt="Hearts Stream"></div>
+        <div class="decoration retro-pc"><img src="images/line.png" alt="Line Heart"></div>
+        <div class="decoration record-player"><img src="images/record.png" alt="Record Player"></div>
+        
+        
+        <div class="content">
+            <h1 id="gift-title">A song for you</h1>
+            <h2>Scan the QR code!</h2>
+            
+            <div class="qr-placeholder">
+                <img src="images/qrcode.png" alt="QR Code">
+            </div>
+            
+            <p class="handwritten">click to restart!</p>
+            <button id="btn-restart" class="btn-round">Restart</button>
+            
+            <br><br>
+            <button class="btn-secondary btn-back" onclick="switchScreen('screen-gifts')">Back</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

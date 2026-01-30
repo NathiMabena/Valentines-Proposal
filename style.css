@@ -1,0 +1,502 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #FADADD; 
+    font-family: 'Fredoka One', cursive;
+    color: #D32F2F;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+
+/* --- MUSIC PLAYER STYLES --- */
+.music-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.music-disc {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #333;
+    border: 2px solid #D32F2F;
+    font-size: 2rem;
+    cursor: pointer;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.spinning {
+    animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+.music-menu {
+    margin-top: 10px;
+    background: white;
+    border: 2px solid #D32F2F;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 160px;
+}
+
+.music-menu.hidden {
+    display: none;
+}
+
+.music-menu button {
+    background: #FFCDD2;
+    border: none;
+    padding: 8px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    font-family: 'Fredoka One', cursive;
+    color: #D32F2F;
+}
+
+.music-menu button:hover {
+    background: #FFA07A;
+}
+
+.music-menu .btn-stop {
+    background: #D32F2F;
+    color: white;
+    text-align: center;
+    margin-top: 5px;
+}
+
+/* --- SCREEN MANAGEMENT --- */
+.screen {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    background-color: #FADADD;
+}
+
+.screen.active {
+    display: flex;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* --- PLACEHOLDERS & DECORATIONS --- */
+.decoration {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.decoration img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* 1. Hanging Hearts: Sized for the Red Area */
+.hanging-hearts { 
+    top: 0; 
+    left: 15px; 
+    width: 280px; /* Big enough for the corner */
+    height: 350px; 
+}
+
+.calendar-icon { 
+    top: 40px; 
+    right: 100px; 
+    width: 250px; 
+    height: 250px; 
+    transform: rotate(10deg); 
+}
+
+/* 2. Paper Plane: Sized for the Green Area */
+.paper-plane { 
+    bottom: 20px; 
+    left: 20px; 
+    width: 400px; 
+    height: 350px; 
+}
+
+.fireworks { top: 40px; left: 150px; width: 150px; height: 150px; transform: rotate(15deg); }
+.mailbox { bottom: 20px; right: 20px; width: 200px; height: 280px; }
+.heart-mascot { top: 20px; left: 20px; width: 80px; height: 80px; }
+.retro-pc { bottom: 40px; left: 40px; width: 180px; height: 150px;  }
+.record-player { top: 25%; right: 100px; width: 180px; height: 180px; transform: rotate(35deg); }
+.hearts-stream { top: 100px; left: 25%; width: 300px; height: 400px; }
+.xoxo { top: 300px; right: 80px; width: 180px; height: 150px; }
+.teddy  { bottom: 5px; left: 30px; width: 250px; height: 250px; }
+.masha  { bottom: 0px; right: 50px; width: 200px; height: 200px; }
+.floatinghearts { top: 130px; left: 25%; width: 300px; height: 350px; transform: rotate(-15deg); }
+.pony { bottom: 0px; left: 0px; width: 150px; height: 150px; }
+
+
+.main-image {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #D32F2F;
+}
+.main-image img {
+    width: 100%;
+    height: auto;
+}
+
+/* --- TYPOGRAPHY --- */
+h1 { font-size: 2rem; margin-bottom: 20px; font-family: 'Pacifico', cursive; line-height: 1.2; }
+h2 { font-size: 1.5rem; margin-bottom: 15px; }
+p { font-size: 1.2rem; margin-bottom: 20px; }
+.handwritten { font-family: 'Pacifico', cursive; transform: rotate(-5deg); margin-top: 10px; }
+
+/* --- BUTTONS --- */
+.buttons { display: flex; gap: 20px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+button { font-family: 'Fredoka One', cursive; font-size: 1rem; padding: 15px 30px; border-radius: 30px; border: 2px solid #D32F2F; cursor: pointer; transition: transform 0.1s; text-transform: uppercase; }
+button:active { transform: scale(0.95); }
+.btn-primary { background-color: #FFA07A; color: #D32F2F; box-shadow: 0 4px 0 #D32F2F; }
+.btn-secondary { background-color: #FFCDD2; color: #D32F2F; box-shadow: 0 4px 0 #D32F2F; }
+
+/* --- SIGNATURE PAD --- */
+.canvas-container { background: white; border: 3px solid #D32F2F; border-radius: 10px; padding: 0; cursor: crosshair; margin: 20px auto; width: 300px; height: 150px; overflow: hidden; position: relative; }
+canvas { width: 100%; height: 100%; display: block; }
+
+/* --- GIFTS (UPDATED WITH POP-UP ANIMATION) --- */
+.gift-container { 
+    display: flex; 
+    gap: 15px; 
+    justify-content: center; 
+    margin-top: 30px; 
+}
+
+.gift-box { 
+    width: 100px; 
+    height: 100px; 
+    background-color: #FFA07A; 
+    border: 2px solid #D32F2F; 
+    border-radius: 15px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    box-shadow: 0 5px 0 #bf360c; 
+    font-size: 1.2rem; 
+    color: #D32F2F; 
+    cursor: pointer;
+    /* This line makes the movement smooth */
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* This section makes them pop up when you hover */
+.gift-box:hover {
+    transform: translateY(-15px) scale(1.1);
+    background-color: #FFB790;
+}
+
+/* --- QR SCREEN --- */
+.qr-placeholder { background: white; padding: 10px; border: 3px dashed #D32F2F; border-radius: 10px; display: inline-block; margin: 20px 0; }
+.qr-placeholder img { width: 250px; height: 250px; display: block; }
+.btn-round { width: 60px; height: 60px; border-radius: 50%; background: #D32F2F; color: white; border: none; font-size: 0.8rem; box-shadow: none; display: inline-flex; align-items: center; justify-content: center; }
+
+/* --- GIFT 1: BOUQUET & BUBBLES --- */
+.bouquet-container {
+    width: 250px;
+    margin: 0 auto;
+    position: relative;
+    border: 2px dashed #D32F2F; 
+    border-radius: 20px;
+    background: rgba(255,255,255,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.bouquet-container:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 10px 20px rgba(211, 47, 47, 0.2);
+    border-style: solid; 
+}
+
+.bouquet-img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 10px; 
+}
+
+.favorite-flower-text {
+    font-family: 'Fredoka One', cursive;
+    color: #D32F2F;
+    font-size: 1rem;
+    text-align: center;
+    margin: 0;
+}
+
+.bubble {
+    position: absolute;
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    border: 2px solid #FFA07A;
+    color: #D32F2F;
+    font-size: 0.9rem;
+    width: 160px;
+    box-shadow: 0 4px 0 #FFCDD2;
+    font-family: 'Fredoka One', cursive;
+    z-index: 10;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: default;
+}
+
+.bubble:hover {
+    transform: scale(1.15) rotate(0deg) !important; 
+    z-index: 20; 
+    box-shadow: 0 8px 0 #FFCDD2; 
+}
+
+/* Positioning the 4 bubbles */
+.bubble-top-left { top: 10%; left: 25%; transform: rotate(-5deg); }
+.bubble-bottom-left { bottom: 20%; left: 25%; transform: rotate(5deg); }
+.bubble-top-right { top: 5%; right: 25%; transform: rotate(5deg); }
+.bubble-bottom-right { bottom: 25%; right: 25%; transform: rotate(-5deg); }
+.bubble-middle-left { top: 40%; left: 20%; transform: rotate(-3deg); }
+.bubble-middle-right { top: 40%; right: 20%; transform: rotate(3deg); }
+
+/* --- GIFT 2: NOTE PAPER --- */
+.note-paper {
+    background: #fff9c4; 
+    width: 400px;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: rotate(-2deg);
+    position: relative;
+    border: 1px solid #ddd;
+    background-image: linear-gradient(#e1e1e1 1px, transparent 1px);
+    background-size: 100% 30px;
+    line-height: 30px;
+    text-align: left;
+}
+
+.note-paper h2 {
+    color: #D32F2F;
+    font-family: 'Pacifico', cursive;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.note-paper p {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    color: #555;
+    margin: 0;
+}
+
+.xoxo-note {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-family: 'Pacifico', cursive;
+    color: red;
+    font-size: 1.5rem;
+    transform: rotate(-10deg);
+}
+
+.btn-back {
+    margin-top: 20px;
+}
+
+/* --- FIREWORKS ANIMATION --- */
+.firework-particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    pointer-events: none; 
+    z-index: 9999; 
+    animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(0);
+        opacity: 0;
+    }
+}
+
+/* ------------------------------------------------ */
+/* MOBILE OPTIMIZATION (<600px)         */
+/* ------------------------------------------------ */
+@media (max-width: 600px) {
+    /* 1. Resize Fonts so they fit */
+    h1 { font-size: 1.5rem; }
+    p { font-size: 1rem; }
+
+    /* 2. Hanging Hearts - Top Left & Smaller */
+    .hanging-hearts {
+        width: 100px;
+        height: 180px;
+        top: 0;
+        left: 0;
+    }
+
+    /* 3. Calendar - Underneath Music Player */
+    .calendar-icon {
+        width: 80px;
+        height: 80px;
+        top: 90px; /* Sits below the 60px music disc + margins */
+        right: 10px;
+    }
+
+    /* 4. Paper Plane - Underneath Buttons & Smaller */
+    .paper-plane {
+        width: 200px;
+        height: 200px;
+        bottom: 20px;
+        left: 20px;
+    }
+
+    /* 5. Main Image Resize */
+    .main-image {
+        width: 120px;
+        height: 120px;
+    }
+
+    /* 6. Gift Screen Decorations (Mobile) */
+    .fireworks {
+        width: 80px;
+        height: 80px;
+        top: 20px;
+        left: 20px;
+    }
+
+    .teddy {
+        width: 150px;
+        height: 150px;
+        bottom: 20px;
+        left: 20px;
+    }
+
+    .mailbox {
+        width: 80px;
+        height: 140px;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .gift-box { 
+    width: 100px; 
+    height: 100px; 
+    background-color: #FFA07A; 
+    border: 2px solid #D32F2F; 
+    border-radius: 15px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    box-shadow: 0 5px 0 #bf360c; 
+    font-size: 1.2rem; 
+    color: #D32F2F; 
+    cursor: pointer;
+    /* This line makes the movement smooth */
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* This section makes them pop up when you hover */
+.gift-box:hover {
+    transform: translateY(-15px) scale(1.1);
+    background-color: #FFB790;
+}
+    
+    /* 7. Gift 1 Mobile adjustments */
+    .bouquet-container { width: 180px; height: 220px; }
+    
+    .bubble { 
+        width: 125px; 
+        font-size: 0.75rem; 
+        padding: 8px; 
+    }
+    
+    /* Reposition bubbles for small screen */
+    .bubble-top-left { top: 15%; left: 2%; }
+    .bubble-top-right { top: 15%; right: 2%; }
+    .bubble-middle-left { top: 45%; left: 0%; }
+    .bubble-middle-right { top: 45%; right: 0%; }
+    .bubble-bottom-left { bottom: 20%; left: 2%; }
+    .bubble-bottom-right { bottom: 20%; right: 2%; }
+
+    /* 8. Gift 2 Note Paper Resize */
+    .note-paper { width: 90%; }
+
+    /* 9. Hearts Stream - Smaller & Left Side */
+    .floatinghearts {
+        width: 40px;
+        height: 150px;
+        left: 10px;
+        top: 100px;
+    }
+
+    .retro-pc { 
+        bottom: 0px; 
+        left: 30%; 
+        width: 180px; 
+        height: 150px;
+    }
+.record-player { 
+    bottom: 19%; 
+    right: 250px; 
+    width: 180px; 
+    height: 180px; 
+     transform: rotate(-34deg);
+}
+.hearts-stream { 
+    top: 10px; 
+    left: 5px; 
+    width: 150px; 
+    height: 140px; 
+}
+}
